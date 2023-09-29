@@ -3,6 +3,8 @@ import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
 import { CiCdAwsPipelineStack } from '../lib/ci-cd-aws-pipeline-stack';
 
+const account = process.env.AWS_ACCOUNT;
+const region = process.env.AWS_REGION;
 const app = new cdk.App();
 new CiCdAwsPipelineStack(app, 'CiCdAwsPipelineStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
@@ -15,6 +17,6 @@ new CiCdAwsPipelineStack(app, 'CiCdAwsPipelineStack', {
 
   /* Uncomment the next line if you know exactly what Account and Region you
    * want to deploy the stack to. */
-  env: { account: '500604948636', region: 'us-east-1' },
+  env: { account, region },
 
 });
