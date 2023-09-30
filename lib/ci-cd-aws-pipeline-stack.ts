@@ -138,7 +138,6 @@ export class CiCdAwsPipelineStack extends cdk.Stack {
 
         // Creates a new blue Target Group that routes traffic from the public Application Load Balancer (ALB) to the
     // registered targets within the Target Group e.g. (EC2 instances, IP addresses, Lambda functions)
-    // https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html
     const targetGroupBlue = new elb.ApplicationTargetGroup(
       this,
       "BlueTargetGroup",
@@ -289,6 +288,11 @@ export class CiCdAwsPipelineStack extends cdk.Stack {
     new pipeline.Pipeline(this, "MyPipeline", {
       pipelineName: 'myPipeline',
       stages: [sourceStage, testStage, buildStage, deployStage],
+    });
+
+     // Outputs the ALB public endpoint
+     new cdk.CfnOutput(this, "PublicAlbEndpoint", {
+      value: "http://" + publicAlb.loadBalancerDnsName,
     });
 
     // new CodePipeline(this, 'myPipeline', {
