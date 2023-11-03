@@ -35,7 +35,7 @@ export class CiCdAwsPipelineStack extends cdk.Stack {
     
 
     const codeRepo = new codecommit.Repository(this, "repo", {
-      repositoryName: "simple-code-repo",
+      repositoryName: "REPO_NAME",
       // Copies files from codepipeline-build-deploy directory to the repo as the initial commit
       code: Code.fromAsset(codeAsset, 'main'),
     });
